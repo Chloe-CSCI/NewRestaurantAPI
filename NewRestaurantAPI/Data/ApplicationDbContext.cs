@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NewRestaurantAPI.Models.Entities;
 
 namespace NewRestaurantAPI.Data
 {
@@ -9,5 +10,11 @@ namespace NewRestaurantAPI.Data
             : base(options)
         {
         }
+
+        // these entities are being queried and an instance of them is being saved by the use of DbSet
+        public DbSet<Customer> Customer => Set<Customer>();
+        public DbSet<Food> Food => Set<Food>();
+        public DbSet<Transactions> Transactions => Set<Transactions>();
+        public DbSet<CustomerFood> CustomerFood => Set<CustomerFood>();
     }
 }

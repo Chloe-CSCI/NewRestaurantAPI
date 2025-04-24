@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NewRestaurantAPI.Data;
 using NewRestaurantAPI.Models.Entities;
 
 namespace NewRestaurantAPI.Services

@@ -32,7 +32,7 @@ namespace RestaurantAPI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(Customer newCustomer)
+        public async Task<IActionResult> Create(Customer newCustomer)//This will be to create a new customer
         {
             if (ModelState.IsValid)
             {
