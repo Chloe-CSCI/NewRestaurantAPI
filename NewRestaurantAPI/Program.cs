@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
@@ -28,7 +28,7 @@ builder.Services.AddScoped<ICustomerRepository, DbCustomerRepository>();
 builder.Services.AddScoped<IFoodRepository, DbFoodRepository>();
 builder.Services.AddScoped<ICustomerFoodRepository, DbCustomerFoodRepository>();
 builder.Services.AddScoped<ITransactionsRepository, DbTransactionsRepository>();
-builder.Services.AddScoped<IUserRepository, DbUserRepository>();
+//builder.Services.AddScoped<IUserRepository, DbUserRepository>();
 
 
 
