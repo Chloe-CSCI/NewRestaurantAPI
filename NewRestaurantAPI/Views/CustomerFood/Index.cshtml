@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NewRestaurantAPI.Models.Entities.Customer>
+﻿@model IEnumerable<NewRestaurantAPI.Models.Entities.CustomerFood>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,13 +16,13 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.menuItem)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayNameFor(model => model.customerId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReservationNumber)
+                @Html.DisplayNameFor(model => model.FoodId)
             </th>
             <th></th>
         </tr>
@@ -34,17 +34,16 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.menuItem)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                @Html.DisplayFor(modelItem => item.customerId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ReservationNumber)
+                @Html.DisplayFor(modelItem => item.FoodId)
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

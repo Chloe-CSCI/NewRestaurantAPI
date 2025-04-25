@@ -21,7 +21,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-
+// The added scopes will reference to the instances of the repos.
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICustomerRepository, DbCustomerRepository>();

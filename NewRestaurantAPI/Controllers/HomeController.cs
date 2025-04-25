@@ -12,18 +12,18 @@ namespace NewRestaurantAPI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
        
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger)// For logging when the category name is derived from a specific controller.
         {
             _logger = logger;
             
         }
 
-        public IActionResult Index()
+        public IActionResult Index() //This will show the homepage in relation to project.
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy() //This will show the privacy notice.
         {
             return View();
         }
@@ -35,7 +35,7 @@ namespace NewRestaurantAPI.Controllers
         }
 
 
-        public IActionResult GetUserName()
+        public IActionResult GetUserName() //This is for authentication of the user. This will identify them.
         {
             if (User.Identity!.IsAuthenticated)
             {

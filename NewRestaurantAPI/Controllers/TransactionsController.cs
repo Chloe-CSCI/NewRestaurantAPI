@@ -20,7 +20,7 @@ namespace NewRestaurantAPI.Controllers
             }
 
 
-            public async Task<IActionResult> Index()
+            public async Task<IActionResult> Index() // This will show a list of the attributes that is related to the entity of Transactions.
             {
                 var restr = await _transactionsRepo.ReadAllAsync();
                 return View(restr);
@@ -28,7 +28,7 @@ namespace NewRestaurantAPI.Controllers
 
 
             [HttpPost]
-            public async Task<IActionResult> Create(Transactions newTransactions)
+            public async Task<IActionResult> Create(Transactions newTransactions) //this will create new information relateed to what is the transactions repository
             {
                 if (ModelState.IsValid)
                 {
@@ -38,7 +38,7 @@ namespace NewRestaurantAPI.Controllers
                 return View(newTransactions);
             }
 
-            public async Task<IActionResult> Details(int id)
+            public async Task<IActionResult> Details(int id) // This will show the details of the transactions.
             {
                 var money = await _transactionsRepo.ReadAsync(id);
                 if (money == null)
@@ -51,7 +51,7 @@ namespace NewRestaurantAPI.Controllers
 
 
             [HttpPost]
-            public async Task<IActionResult> Edit(Transactions transactions)
+            public async Task<IActionResult> Edit(Transactions transactions) // This will will used to as a way to edit the transactions.
             {
                 if (ModelState.IsValid)
                 {
@@ -62,7 +62,7 @@ namespace NewRestaurantAPI.Controllers
                 return View(transactions);
             }
 
-            public async Task<IActionResult> Delete(int id)
+            public async Task<IActionResult> Delete(int id) // This will be used to delete the transactions.
             {
                 var trasactions = await _transactionsRepo.ReadAsync(id);
                 if (trasactions == null)
@@ -74,7 +74,7 @@ namespace NewRestaurantAPI.Controllers
 
 
             [HttpPost, ActionName("Delete")]
-            public async Task<IActionResult> DeleteConfirmed(int id)
+            public async Task<IActionResult> DeleteConfirmed(int id)//This will confirm the deletion that was made.
             {
                 await _transactionsRepo.DeleteAsync(id);
                 return RedirectToAction("Index");
@@ -82,7 +82,7 @@ namespace NewRestaurantAPI.Controllers
             }
 
 
-        public IActionResult GetUserName()
+        public IActionResult GetUserName()  //This is for authentication of the user. This will identify them.
         {
             if (User.Identity!.IsAuthenticated)
             {

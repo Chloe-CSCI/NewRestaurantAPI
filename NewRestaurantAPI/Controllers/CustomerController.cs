@@ -13,13 +13,13 @@ namespace RestaurantAPI.Controllers
     [Authorize]
     public class CustomerController : Controller
     {
-        private readonly ICustomerRepository _customerRepo;
+        private readonly ICustomerRepository _customerRepo; // this will allow us to use what is in the ICustomerRepository interface.
 
 
 
         public CustomerController(ICustomerRepository customerRepo)
         {
-            _customerRepo = customerRepo;
+            _customerRepo = customerRepo; // this will let us have something to use so as to reference to in the code.
         }
 
         public async Task<IActionResult> Index() // This will show a list of the attributes that is related to the entity of Customer.
@@ -46,7 +46,7 @@ namespace RestaurantAPI.Controllers
 
         public async Task<IActionResult> Details(int id) // This will show the details of Customer
         {
-            var participant = await _customerRepo.ReadAsync(id);
+            var participant = await _customerRepo.ReadAsync(id); //having participant refenece to _customer will let us get information from the interface repo.
             if (participant == null)
             {
                 return RedirectToAction("Index");
@@ -80,7 +80,7 @@ namespace RestaurantAPI.Controllers
         }
 
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")] //This will be a way that indicates that the delete happened
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _customerRepo.DeleteAsync(id);
@@ -88,7 +88,7 @@ namespace RestaurantAPI.Controllers
         }
 
 
-        public IActionResult GetUserName()
+        public IActionResult GetUserName() //This is for authentication of the user. This will identify them.
         {
             if (User.Identity!.IsAuthenticated)
             {

@@ -69,7 +69,7 @@ namespace NewRestaurantAPI.Controllers
         }
 
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")] //This will show a confirmation that the delete happened.
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _foodRepo.DeleteAsync(id);
@@ -79,7 +79,7 @@ namespace NewRestaurantAPI.Controllers
 
 
 
-        public IActionResult GetUserName()
+        public IActionResult GetUserName() //This is for authentication of the user. This will identify them.
         {
             if (User.Identity!.IsAuthenticated)
             {

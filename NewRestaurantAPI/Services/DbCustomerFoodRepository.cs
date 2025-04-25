@@ -11,7 +11,7 @@ namespace NewRestaurantAPI.Services
         private readonly ICustomerRepository _customerRepo;
         private readonly IFoodRepository _foodRepo;
 
-        public DbCustomerFoodRepository(ApplicationDbContext db, ICustomerRepository customerRepo, IFoodRepository foodRepo)
+        public DbCustomerFoodRepository(ApplicationDbContext db, ICustomerRepository customerRepo, IFoodRepository foodRepo)// injecting the applicationDbContext cutomer and food interface repos into the repository.
         {
             _db = db;
             _customerRepo = customerRepo;

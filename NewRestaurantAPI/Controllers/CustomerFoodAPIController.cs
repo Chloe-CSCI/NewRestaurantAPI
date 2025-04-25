@@ -12,7 +12,8 @@ namespace NewRestaurantAPI.Controllers
     {
         private readonly ICustomerRepository _customerRepo;
         private readonly IFoodRepository _foodRepo;
-        private readonly ICustomerFoodRepository _customerFoodRepo;
+        private readonly ICustomerFoodRepository _customerFoodRepo;// This wll get the CRUDD Async information frome the interface repo and
+        // the _customerFoodRepo will help give us something to reference to.
 
         public CustomerFoodAPIController(// This will help takg the information for the customer, food, and customerFood Interface repos.
         ICustomerRepository customerRepo,
@@ -56,7 +57,7 @@ namespace NewRestaurantAPI.Controllers
         }
 
 
-        public IActionResult GetUserName()
+        public IActionResult GetUserName()//This is for authentication of the user. This will identify them.
         {
             if (User.Identity!.IsAuthenticated)
             {

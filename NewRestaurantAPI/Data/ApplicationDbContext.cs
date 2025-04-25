@@ -13,6 +13,7 @@ namespace NewRestaurantAPI.Data
         }
 
         // these entities are being queried and an instance of them is being saved by the use of DbSet
+        // The Set returns a set for the given entity type.
         public DbSet<Customer> Customer => Set<Customer>();
         public DbSet<Food> Food => Set<Food>();
         public DbSet<Transactions> Transactions => Set<Transactions>();

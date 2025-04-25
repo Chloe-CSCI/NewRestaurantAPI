@@ -93,6 +93,9 @@ namespace RestaurantAPI.Controllers
             return RedirectToAction("Details", "customer", new { id = customerId });
         }
 
+
+
+
         // This will be used to delete the customer.
         public async Task<IActionResult> Delete(
       [Bind(Prefix = "id")] int customerId, int foodId)
