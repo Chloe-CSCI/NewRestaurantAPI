@@ -22,7 +22,7 @@ namespace RestaurantAPI.Controllers
             _customerRepo = customerRepo;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index() // This will show a list of the attributes that is related to the entity of Customer.
         {
             var restr = await _customerRepo.ReadAllAsync();
             return View(restr);
@@ -44,7 +44,7 @@ namespace RestaurantAPI.Controllers
 
 
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id) // This will show the details of Customer
         {
             var participant = await _customerRepo.ReadAsync(id);
             if (participant == null)
@@ -57,9 +57,9 @@ namespace RestaurantAPI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Customer customer)
+        public async Task<IActionResult> Edit(Customer customer)//This will let the user edit/update Customer Information.
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // This will check if it is valid, and will update if it is.
             {
                 await _customerRepo.UpdateAsync(customer.Id, customer);
                 return RedirectToAction("Index");
@@ -69,7 +69,7 @@ namespace RestaurantAPI.Controllers
 
 
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id) //This will be used to delete customers.
         {
             var customer = await _customerRepo.ReadAsync(id);
             if (customer == null)
@@ -85,6 +85,22 @@ namespace RestaurantAPI.Controllers
         {
             await _customerRepo.DeleteAsync(id);
             return RedirectToAction("Index");
+        }
+
+
+        public IActionResult GetUserName()
+        {
+            if (User.Identity!.IsAuthenticated)
+            {
+                string username = User.Identity.Name ?? "";
+                return Content(username);
+            }
+            return Content("No user");
+        }
+        [Authorize]
+        public IActionResult Restricted()
+        {
+            return Content("This is restricted.");
         }
     }
 }

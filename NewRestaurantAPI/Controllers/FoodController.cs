@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NewRestaurantAPI.Models.Entities;
 using NewRestaurantAPI.Services;
 
 namespace NewRestaurantAPI.Controllers
 {
+    [Authorize]
     public class FoodController : Controller
     {
         public readonly IFoodRepository _foodRepo;
@@ -15,7 +17,7 @@ namespace NewRestaurantAPI.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index() // This will show a list of the attributes that is related to the entity of Food.
         {
             var restr = await _foodRepo.ReadAllAsync();
             return View(restr);
@@ -23,9 +25,9 @@ namespace NewRestaurantAPI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(Food newfood)
+        public async Task<IActionResult> Create(Food newfood) //This will be to create new food
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //this will see if it is valid.
             {
                 await _foodRepo.CreateAsync(newfood);
                 return RedirectToAction("Index");
@@ -33,7 +35,7 @@ namespace NewRestaurantAPI.Controllers
             return View(newfood);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id) //This will show the details of the food.
         {
             var meal = await _foodRepo.ReadAsync(id);
             if (meal == null)
@@ -46,7 +48,7 @@ namespace NewRestaurantAPI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Food food)
+        public async Task<IActionResult> Edit(Food food) //This will be used to edit the food.
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +58,7 @@ namespace NewRestaurantAPI.Controllers
             return View(food);
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id) //This will be used to delete the Food.
         {
             var food = await _foodRepo.ReadAsync(id);
             if (food == null)
@@ -72,6 +74,24 @@ namespace NewRestaurantAPI.Controllers
         {
             await _foodRepo.DeleteAsync(id);
             return RedirectToAction("Index");
+        }
+
+
+
+
+        public IActionResult GetUserName()
+        {
+            if (User.Identity!.IsAuthenticated)
+            {
+                string username = User.Identity.Name ?? "";
+                return Content(username);
+            }
+            return Content("No user");
+        }
+        [Authorize]
+        public IActionResult Restricted()
+        {
+            return Content("This is restricted.");
         }
 
 

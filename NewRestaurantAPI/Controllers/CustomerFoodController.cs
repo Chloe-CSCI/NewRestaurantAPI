@@ -1,17 +1,19 @@
 ﻿using NewRestaurantAPI.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using NewRestaurantAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace RestaurantAPI.Controllers
 {
+    [Authorize]
     public class CustomerFoodController : Controller
     {
         private readonly ICustomerRepository _customerRepo;
         private readonly IFoodRepository _foodRepo;
         private readonly ICustomerFoodRepository _customerFoodRepo;
 
-        public CustomerFoodController(
+        public CustomerFoodController(// These will make it so that this controller can reference to the customer, food, and customerFood interface repos.
         ICustomerRepository customerRepo,
         IFoodRepository foodRepo,
         ICustomerFoodRepository customerFoodRepo)
@@ -21,7 +23,7 @@ namespace RestaurantAPI.Controllers
             _customerFoodRepo = customerFoodRepo;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() // This will show the list associated with customerFood entity.
         {
             return View();
         }
@@ -29,7 +31,7 @@ namespace RestaurantAPI.Controllers
 
 
 
-        public async Task<IActionResult> Create(
+        public async Task<IActionResult> Create( // This will be used to create a new CustoemrId.
         [Bind(Prefix = "id")] int customerId, int foodId)
         {
             var participant = await _customerRepo.ReadAsync(customerId);
@@ -55,7 +57,7 @@ namespace RestaurantAPI.Controllers
             };
             return View(CustomerFoodVM);
         }
-        [HttpPost, ValidateAntiForgeryToken, ActionName("Create")]
+        [HttpPost, ValidateAntiForgeryToken, ActionName("Create")] // this will confirm the create
         public async Task<IActionResult> CreateConfirmed(int customerId, int foodId)
         {
             await _customerFoodRepo.CreateAsync(customerId, foodId);
@@ -118,7 +120,20 @@ namespace RestaurantAPI.Controllers
         }
 
 
-
+        public IActionResult GetUserName()
+        {
+            if (User.Identity!.IsAuthenticated)
+            {
+                string username = User.Identity.Name ?? "";
+                return Content(username);
+            }
+            return Content("No user");
+        }
+        [Authorize]
+        public IActionResult Restricted()
+        {
+            return Content("This is restricted.");
+        }
 
 
 
