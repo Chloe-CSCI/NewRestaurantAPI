@@ -65,7 +65,7 @@ namespace RestaurantAPI.Controllers
         }
 
 
-        // this will show the customer and their choice of meal together
+        // this will show the customers rating of the food.
 
         public async Task<IActionResult> CusomertMeal(
       [Bind(Prefix = "id")] int customerId, int foodId)

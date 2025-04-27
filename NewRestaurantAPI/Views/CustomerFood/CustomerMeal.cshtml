@@ -1,8 +1,10 @@
 ﻿@model NewRestaurantAPI.Models.Entities.CustomerFood
 
 @{
- 
-    ViewData["Title"] = "Edit";
+
+    ViewData["Title"] = "Edit"; //make so that this can be a way for customers to rate their food.
+    var participant = Model.customer;
+    var meal = Model.food;
 }
 
 <h1>CusomertMeal</h1>
@@ -13,34 +15,32 @@
     <div class="col-md-4">
         <form asp-action="CustomerMeal" id="formCustomerMeal">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+            <input type="hidden" name="customerFoodId" value="@Model.Id"/>
+            <input type="hidden" name="customerId" value="@participant!.Id"/>
+          
             <div class="form-group">
                 <label asp-for="menuItem" class="control-label"></label>
-                <input asp-for="menuItem" class="form-control" />
-                <span asp-validation-for="menuItem" class="text-danger"></span>
+                <select class="form-select" asp-for="menuItem" class="form-select">
+                    <option value="excellent">excellent</option>
+                    <option value="great">great</option>
+                    <option value="good">good</option>
+                    <option value="bad">bad</option>
+                    <option value="terrible">terrible</option>
+                </select>
+                
+    @* 
+                <span asp-validation-for="menuItem" class="text-danger"></span> *@
             </div>
+           
             <div class="form-group">
-                <label asp-for="customerId" class="control-label"></label>
-                <input asp-for="customerId" class="form-control" />
-                <span asp-validation-for="customerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FoodId" class="control-label"></label>
-                <input asp-for="FoodId" class="form-control" />
-                <span asp-validation-for="FoodId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Review Meal" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
+    <a asp-action="Detials" asp-asp-controller="Customer"></a>
     <a asp-action="Index">Back to List</a>
 </div>
 

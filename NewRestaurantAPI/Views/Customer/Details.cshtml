@@ -39,4 +39,13 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
+    <a asp-action="CustomerMeal" asp-controller="CustomerFood"
+       asp-route-id="formCustomerMeal" >
+    Review Meal
+    </a>
+    <a asp-action="delete" asp-controller="CustomerFood" 
+    asp-route-id="formCustomerMeal">
+    Delete the meal
+    </a>
 </div>
+
