@@ -1,52 +1,32 @@
 ﻿@model IEnumerable<NewRestaurantAPI.Models.Entities.CustomerFood>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Customer Food Combo";
 }
 
 <h1>Index</h1>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Customer
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.menuItem)
+                Food
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.customerId)
+                Transactions
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FoodId)
-            </th>
-            <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.menuItem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.customerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FoodId)
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+    <tbody id="tableBody">
+
     </tbody>
 </table>
+@section Scripts {
+    <script defer type="module" src="~/js/CustomerFoodIndex.js"></script>
+}

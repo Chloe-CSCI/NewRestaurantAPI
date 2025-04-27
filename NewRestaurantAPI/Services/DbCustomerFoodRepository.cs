@@ -6,11 +6,12 @@ namespace NewRestaurantAPI.Services
 {
     public class DbCustomerFoodRepository : ICustomerFoodRepository
     {
-
-        private readonly ApplicationDbContext _db;
+        // The injection of the applicationDbContext and the Customer and Food interface repository.
+        private readonly ApplicationDbContext _db; 
         private readonly ICustomerRepository _customerRepo;
         private readonly IFoodRepository _foodRepo;
 
+        // This wll help add a method to add entities to the database.
         public DbCustomerFoodRepository(ApplicationDbContext db, ICustomerRepository customerRepo, IFoodRepository foodRepo)// injecting the applicationDbContext cutomer and food interface repos into the repository.
         {
             _db = db;
@@ -20,7 +21,8 @@ namespace NewRestaurantAPI.Services
 
 
 
-        public async Task<ICollection<CustomerFood>> ReadAllAsync()
+        public async Task<ICollection<CustomerFood>> ReadAllAsync() //This wil read all the records from the CustomerFood Dataabase, includes query results from customer and food, 
+            //and return a new query with the related data.
         {
             return await _db.CustomerFood
                 .Include(cf => cf.food)
@@ -29,7 +31,7 @@ namespace NewRestaurantAPI.Services
         }
 
 
-        public async Task<CustomerFood> CreateAsync(int customerId, int foodId)
+        public async Task<CustomerFood> CreateAsync(int customerId, int foodId) // This will create a new CustomerFood.
         {
             var participant = await _customerRepo.ReadAsync(customerId);
             if (participant == null)
@@ -61,8 +63,8 @@ namespace NewRestaurantAPI.Services
         }
 
 
-        public async Task<CustomerFood?> ReadAsync(int id)
-        {
+        public async Task<CustomerFood?> ReadAsync(int id) //this will retrieve an object from the database, includes query results from customer and food.
+        {// and return a new query with the related data.
             return await _db.CustomerFood
                 .Include(cf => cf.food)
                 .Include(cf => cf.customer)
@@ -71,7 +73,7 @@ namespace NewRestaurantAPI.Services
         }
 
 
-        public async Task UpdateCustomerFoodAsync(int customerFoodId, string menuItem)
+        public async Task UpdateCustomerFoodAsync(int customerFoodId, string menuItem) // This will update the customerFood by pulling from the CustomerFood Entity.
         {
             var custFood = await ReadAsync(customerFoodId);
             if (custFood != null)
@@ -82,7 +84,7 @@ namespace NewRestaurantAPI.Services
             }
         }
 
-        public async Task DeleteAsync(int customerId, int customerFoodId)
+        public async Task DeleteAsync(int customerId, int customerFoodId) // This will delete CustomerFood and saves the changes
         {
 
             var participant = await _customerRepo.ReadAsync(customerId);

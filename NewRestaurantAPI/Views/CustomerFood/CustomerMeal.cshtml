@@ -1,7 +1,8 @@
 ﻿@model NewRestaurantAPI.Models.Entities.CustomerFood
 
 @{
-    ViewData["Title"] = "CusomertMeal";
+ 
+    ViewData["Title"] = "Edit";
 }
 
 <h1>CusomertMeal</h1>
@@ -10,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CusomertMeal">
+        <form asp-action="CustomerMeal" id="formCustomerMeal">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
@@ -44,5 +45,6 @@
 </div>
 
 @section Scripts {
+    <script defer type="module" src="~/js/CustomerFoodCustomerMeal.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
