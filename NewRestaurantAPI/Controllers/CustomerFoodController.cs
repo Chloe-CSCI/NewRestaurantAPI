@@ -30,7 +30,7 @@ namespace RestaurantAPI.Controllers
 
 
 
-
+        //be able to create a link with the customer and food.
         public async Task<IActionResult> Create( // This will be used to create a new CustoemrId.
         [Bind(Prefix = "id")] int customerId, int foodId)
         {
@@ -44,7 +44,7 @@ namespace RestaurantAPI.Controllers
             {
                 return RedirectToAction("Details", "customer", new { id = customerId });
             }
-            var customerFood = meal.CustomerFoods
+            var customerFood = participant.CustomersFood
                 .SingleOrDefault(cf => cf.FoodId == foodId);
             if (customerFood != null)
             {
@@ -65,9 +65,12 @@ namespace RestaurantAPI.Controllers
         }
 
 
+
+
+
         // this will show the customers rating of the food.
 
-        public async Task<IActionResult> CusomertMeal(
+        public async Task<IActionResult> customerMeal(
       [Bind(Prefix = "id")] int customerId, int foodId)
         {
             var participant = await _customerRepo.ReadAsync(customerId);
@@ -85,7 +88,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken, ActionName("CusomertMeal")]
-        public async Task<IActionResult> CusomertMealConfirmed(
+        public async Task<IActionResult> customerMealConfirmed(
             string customerId, int customerFoodId, string menuItem)
         {
             await _customerFoodRepo.UpdateCustomerFoodAsync(

@@ -43,6 +43,11 @@ namespace RestaurantAPI.Controllers
         }
 
 
+        public IActionResult Create()//This will be to create a new customer
+        {
+            return View();
+        }
+
 
         public async Task<IActionResult> Details(int id) // This will show the details of Customer
         {
@@ -65,6 +70,16 @@ namespace RestaurantAPI.Controllers
                 return RedirectToAction("Index");
             }
             return View(customer);
+        }
+
+        public async Task<IActionResult> Edit(int id) // This will show the details of Customer
+        {
+            var participant = await _customerRepo.ReadAsync(id); //having participant refenece to _customer will let us get information from the interface repo.
+            if (participant == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(participant);
         }
 
 

@@ -35,6 +35,11 @@ namespace NewRestaurantAPI.Controllers
             return View(newfood);
         }
 
+        public IActionResult Create()//This will be to create a new customer
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Details(int id) //This will show the details of the food.
         {
             var meal = await _foodRepo.ReadAsync(id);
@@ -57,6 +62,17 @@ namespace NewRestaurantAPI.Controllers
             }
             return View(food);
         }
+
+        public async Task<IActionResult> Edit(int id) // This will edit the food
+        {
+            var participant = await _foodRepo.ReadAsync(id); //having participant refenece to _food will let us get information from the interface repo.
+            if (participant == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(participant);
+        }
+
 
         public async Task<IActionResult> Delete(int id) //This will be used to delete the Food.
         {

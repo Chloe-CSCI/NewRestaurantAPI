@@ -1,6 +1,6 @@
 ﻿@model NewRestaurantAPI.Models.Entities.Customer
 
-@{
+@{ //loop through the meals and show them.
     ViewData["Title"] = "Details";
 }
 
@@ -38,14 +38,57 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-    <a asp-action="CustomerMeal" asp-controller="CustomerFood"
-       asp-route-id="formCustomerMeal" >
-    Review Meal
-    </a>
-    <a asp-action="delete" asp-controller="CustomerFood" 
-    asp-route-id="formCustomerMeal">
-    Delete the meal
-    </a>
+    <a asp-action="Index">Back to List</a> |
+    <a asp-action="Index" asp-controller="food" asp-route-id="@Model!.Id"> See Food</a> |
+    <a asp-action="Index" asp-controller="transactions" asp-route-id="@Model!.Id"> See transactions</a> |
+    <a asp-action="Index" asp-controller="CustomerFood"> Customer's Food Review </a>
+
+   
 </div>
 
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Food name
+           
+            </th>
+        </tr>
+    </thead>
+<tbody>
+    @if (Model != null)
+    {
+        @foreach(var item in Model.CustomersFood)
+        {
+            <tr>
+
+
+                <td>
+                    @item.food!.FoodName
+                </td>
+                <td>
+                    @item.food!.Description
+                </td>
+                <td>
+                    @item.food!.Ingredients
+                </td>
+                <td>
+                        @item.menuItem
+                </td>
+
+                <td>
+
+                    <a asp-action="customerMeal" asp-controller="CustomerFood"
+                       asp-route-customerid="@Model!.Id" asp-route-foodId="@item.FoodId">
+                        Review Meal
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+    }
+
+</tbody>
+</table>

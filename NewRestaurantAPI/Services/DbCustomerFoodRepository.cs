@@ -31,7 +31,7 @@ namespace NewRestaurantAPI.Services
         }
 
 
-        public async Task<CustomerFood> CreateAsync(int customerId, int foodId) // This will create a new CustomerFood.
+        public async Task<CustomerFood?> CreateAsync(int customerId, int foodId) // This will create a new CustomerFood.
         {
             var participant = await _customerRepo.ReadAsync(customerId);
             if (participant == null)
