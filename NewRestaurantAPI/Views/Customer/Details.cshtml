@@ -37,12 +37,16 @@
     </dl>
 </div>
 <div>
+  
+
+
+
+
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a> |
-    <a asp-action="Index" asp-controller="food" asp-route-id="@Model!.Id"> See Food</a> |
+    
     <a asp-action="Index" asp-controller="transactions" asp-route-id="@Model!.Id"> See transactions</a> |
     <a asp-action="Index" asp-controller="CustomerFood"> Customer's Food Review </a>
-
    
 </div>
 
@@ -52,12 +56,17 @@
         <tr>
             <th>
                 Food name
-           
+            </th>
+            <th>
+                Food Description
+            </th>
+            <th>
+                Food Ingredients
             </th>
         </tr>
     </thead>
-<tbody>
-    @if (Model != null)
+<tbody> 
+   @if (Model != null)
     {
         @foreach(var item in Model.CustomersFood)
         {
@@ -92,3 +101,4 @@
 
 </tbody>
 </table>
+ 

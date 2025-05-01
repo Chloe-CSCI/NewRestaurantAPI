@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
-namespace RestaurantAPI.Controllers
+namespace NewRestaurantAPI.Controllers
 {
     [Authorize]
     public class CustomerController : Controller

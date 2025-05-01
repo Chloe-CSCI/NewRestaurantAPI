@@ -4,7 +4,7 @@ using NewRestaurantAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace RestaurantAPI.Controllers
+namespace NewRestaurantAPI.Controllers
 {
     [Authorize]
     public class CustomerFoodController : Controller
