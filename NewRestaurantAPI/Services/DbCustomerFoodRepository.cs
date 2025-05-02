@@ -31,16 +31,16 @@ namespace NewRestaurantAPI.Services
         }
 
 
-        public async Task<CustomerFood?> CreateAsync(int customerId, int foodId) // This will create a new CustomerFood.
+        public async Task<CustomerFood?> CreateAsync(int customerId, int foodId)
         {
             var participant = await _customerRepo.ReadAsync(customerId);
             if (participant == null)
             {
                 return null;
             }
-            var customersFood = participant.CustomersFood
+            var customerPick = participant.CustomersFood
                 .FirstOrDefault(cf => cf.FoodId == foodId);
-            if (customersFood != null)
+            if(customerPick != null)
             {
                 return null;
             }
@@ -49,7 +49,6 @@ namespace NewRestaurantAPI.Services
             {
                 return null;
             }
-
             var customerFood = new CustomerFood
             {
                 customer = participant,
@@ -59,7 +58,6 @@ namespace NewRestaurantAPI.Services
             meal.CustomerFoods.Add(customerFood);
             await _db.SaveChangesAsync();
             return customerFood;
-
         }
 
 

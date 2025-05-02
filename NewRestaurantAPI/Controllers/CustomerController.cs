@@ -30,19 +30,6 @@ namespace NewRestaurantAPI.Controllers
             return View(restr);
         }
 
-        
-
-
-
-      
-         
-         
-         
-         
-         
-         
-
-
 
 
 

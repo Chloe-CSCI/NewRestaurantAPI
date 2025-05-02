@@ -48,6 +48,8 @@
     <a asp-action="Index" asp-controller="transactions" asp-route-id="@Model!.Id"> See transactions</a> |
     <a asp-action="Index" asp-controller="CustomerFood"> Customer's Food Review </a> |
     <a asp-action="OrderFood" asp-controller="Food" asp-route-id="@Model!.Id">Order Food</a>
+
+    @*<a asp-action="OrderFood" asp-controller="CustomerFood" asp-route-id="@Model!.customer!.Id">Do not Order</a>*@
    
 </div>
 
@@ -89,14 +91,14 @@
 
                 <td>
                         <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover"
-                                title="Review Meal" data-bs-content="Come and review the food"></button>
+                                title="Review Meal" data-bs-content="Come and review the food">
                                 <form>
                     <a asp-action="CustomerMeal" asp-controller="CustomerFood"
                        asp-route-customerid="@Model!.Id" asp-route-foodId="@item.FoodId">
                         Review Meal
                     </a>
                         </form>
-
+                        </button>
                 </td>
 
             </tr>

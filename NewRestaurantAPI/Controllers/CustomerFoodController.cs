@@ -31,46 +31,44 @@ namespace NewRestaurantAPI.Controllers
 
 
         //be able to create a link with the customer and food.
-        public async Task<IActionResult> Create( // This will be used to create a new CustoemrId.
-        [Bind(Prefix = "id")] int customerId, int foodId)
+        
+        public async Task<IActionResult> Create(//Takes two parameters.
+            [Bind(Prefix ="id")] int customerId, int foodId)
         {
             var participant = await _customerRepo.ReadAsync(customerId);
-            if (participant == null)
+            if(participant == null)
             {
-                return RedirectToAction("Index", "customer");
+                return RedirectToAction("Index", "Customer");
             }
             var meal = await _foodRepo.ReadAsync(foodId);
-            if (meal == null)
+            if(meal == null)
             {
-                return RedirectToAction("Details", "customer", new { id = customerId });
+                return RedirectToAction("Details", "Customer", new { id = customerId });
             }
-            var customerFood = participant.CustomersFood
-                .SingleOrDefault(cf => cf.FoodId == foodId);
+            var customerFood = participant.CustomersFood.SingleOrDefault(cf =>cf.FoodId == foodId);
             if (customerFood != null)
             {
-                return RedirectToAction("Details", "customer", new { id = customerId });
+                return RedirectToAction("Details", "Customer", new { id = customerId });
             }
-            var CustomerFoodVM = new CustomerFoodVM
+            var customerFoodVM = new CustomerFoodVM
             {
                 customer = participant,
                 food = meal
             };
-            return View(CustomerFoodVM);
+            return View(customerFoodVM);    
         }
 
-        [HttpPost, ValidateAntiForgeryToken, ActionName("Create")] // this will confirm the create
+        [HttpPost, ValidateAntiForgeryToken, ActionName("Create")]
         public async Task<IActionResult> CreateConfirmed(int customerId, int foodId)
         {
             await _customerFoodRepo.CreateAsync(customerId, foodId);
-            return RedirectToAction("Details", "customer", new { id = customerId });
+            return RedirectToAction("Details","Customer", new { id = customerId });
         }
-
-
 
 
 
         // this will show the customers rating of the food.
-
+     
         public async Task<IActionResult> CustomerMeal(
       [Bind(Prefix = "id")] int customerId, int foodId)
         {
