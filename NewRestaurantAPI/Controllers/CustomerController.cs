@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using NewRestaurantAPI.Models.Entities;
 using NewRestaurantAPI.Services;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
@@ -14,6 +15,7 @@ namespace NewRestaurantAPI.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerRepository _customerRepo; // this will allow us to use what is in the ICustomerRepository interface.
+
 
 
 
@@ -27,6 +29,19 @@ namespace NewRestaurantAPI.Controllers
             var restr = await _customerRepo.ReadAllAsync();
             return View(restr);
         }
+
+        
+
+
+
+      
+         
+         
+         
+         
+         
+         
+
 
 
 

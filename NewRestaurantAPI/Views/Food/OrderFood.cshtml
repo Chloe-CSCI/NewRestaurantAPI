@@ -1,0 +1,56 @@
+﻿@model IEnumerable<NewRestaurantAPI.Models.Entities.Food>
+
+@{
+    var participant = (Customer?)ViewData["Customer"];
+
+    ViewData["Title"] = $"OrderFood for {participant!.Name}";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredients)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null)
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredients)
+            </td>
+            <td>
+                        <a asp-action="Create" asp-controller="CustomerFood"
+                           asp-route-id="@participant!.Id"
+               asp-route-foodId="@item.Id">Order</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

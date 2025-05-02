@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NewRestaurantAPI.Models.Entities;
 using NewRestaurantAPI.Services;
+using System.Xml.Serialization;
 
 namespace NewRestaurantAPI.Controllers
 {
@@ -11,13 +12,17 @@ namespace NewRestaurantAPI.Controllers
        
 
             private readonly ITransactionsRepository _transactionsRepo;
+        private readonly ICustomerRepository _customerRepo;
+        private readonly IFoodRepository _foodRepo;
 
 
 
-            public TransactionsController(ITransactionsRepository transactionsRepo)
+        public TransactionsController(ITransactionsRepository transactionsRepo, ICustomerRepository customerRepo, IFoodRepository foodRepo)
             {
                 _transactionsRepo = transactionsRepo;
-            }
+            _customerRepo = customerRepo;
+            _foodRepo = foodRepo;
+        }
 
 
             public async Task<IActionResult> Index() // This will show a list of the attributes that is related to the entity of Transactions.
@@ -43,6 +48,11 @@ namespace NewRestaurantAPI.Controllers
             return View();
         }
 
+
+        
+
+
+
         public async Task<IActionResult> Details(int id) // This will show the details of the transactions.
             {
                 var money = await _transactionsRepo.ReadAsync(id);
@@ -53,11 +63,7 @@ namespace NewRestaurantAPI.Controllers
                 return View(money);
             }
 
-
-        //public async Task<IActionResult> customerMeal
-        //{
-
-        //}
+       
 
 
             [HttpPost]

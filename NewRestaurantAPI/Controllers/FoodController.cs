@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 using NewRestaurantAPI.Models.Entities;
 using NewRestaurantAPI.Services;
 
@@ -9,11 +10,13 @@ namespace NewRestaurantAPI.Controllers
     public class FoodController : Controller
     {
         public readonly IFoodRepository _foodRepo;
+        private readonly ICustomerRepository _customerRepo;
 
 
-        public FoodController(IFoodRepository foodRepo)
+        public FoodController(IFoodRepository foodRepo, ICustomerRepository customerRepo)
         {
             _foodRepo = foodRepo;
+            _customerRepo = customerRepo;
         }
 
 
@@ -22,6 +25,27 @@ namespace NewRestaurantAPI.Controllers
             var restr = await _foodRepo.ReadAllAsync();
             return View(restr);
         }
+
+
+
+        public async Task<IActionResult> OrderFood([Bind(Prefix = "id")] int customerId)
+        {
+            var participant = await _customerRepo.ReadAsync(customerId);
+            if (participant == null)
+            {
+                return RedirectToAction("Index", "Customer");
+            }
+            var allFood = await _foodRepo.ReadAllAsync();
+            var foodOrdered = participant.CustomersFood
+                .Select(cf => cf.food).ToList();
+            var foodNotOrdered = allFood.Except(foodOrdered);
+            ViewData["Customer"] = participant;
+            return View(foodNotOrdered);
+        }
+
+
+
+
 
 
         [HttpPost]

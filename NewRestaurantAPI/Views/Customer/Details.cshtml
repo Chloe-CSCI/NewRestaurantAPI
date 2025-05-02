@@ -46,7 +46,8 @@
     <a asp-action="Index">Back to List</a> |
     
     <a asp-action="Index" asp-controller="transactions" asp-route-id="@Model!.Id"> See transactions</a> |
-    <a asp-action="Index" asp-controller="CustomerFood"> Customer's Food Review </a>
+    <a asp-action="Index" asp-controller="CustomerFood"> Customer's Food Review </a> |
+    <a asp-action="OrderFood" asp-controller="Food" asp-route-id="@Model!.Id">Order Food</a>
    
 </div>
 
@@ -87,11 +88,14 @@
                 </td>
 
                 <td>
-
-                    <a asp-action="customerMeal" asp-controller="CustomerFood"
+                        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover"
+                                title="Review Meal" data-bs-content="Come and review the food"></button>
+                                <form>
+                    <a asp-action="CustomerMeal" asp-controller="CustomerFood"
                        asp-route-customerid="@Model!.Id" asp-route-foodId="@item.FoodId">
                         Review Meal
                     </a>
+                        </form>
 
                 </td>
 

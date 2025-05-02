@@ -57,6 +57,7 @@ namespace NewRestaurantAPI.Controllers
             };
             return View(CustomerFoodVM);
         }
+
         [HttpPost, ValidateAntiForgeryToken, ActionName("Create")] // this will confirm the create
         public async Task<IActionResult> CreateConfirmed(int customerId, int foodId)
         {
@@ -70,7 +71,7 @@ namespace NewRestaurantAPI.Controllers
 
         // this will show the customers rating of the food.
 
-        public async Task<IActionResult> customerMeal(
+        public async Task<IActionResult> CustomerMeal(
       [Bind(Prefix = "id")] int customerId, int foodId)
         {
             var participant = await _customerRepo.ReadAsync(customerId);
@@ -88,7 +89,7 @@ namespace NewRestaurantAPI.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken, ActionName("CusomertMeal")]
-        public async Task<IActionResult> customerMealConfirmed(
+        public async Task<IActionResult> CustomerMealConfirmed(
             string customerId, int customerFoodId, string menuItem)
         {
             await _customerFoodRepo.UpdateCustomerFoodAsync(
