@@ -18,7 +18,7 @@
 
           <input type="hidden" name="foodId" value="@Model.food.Id"/>
 
-            <input type="submit" value="OrderFood" class="btn btn-danger" /> |
+            <input type="submit" value="OrderFood" class="btn btn-primary btn-sm" /> |
             <a asp-action="OrderFood" asp-controller="Food"
             asp-route-id="@Model!.customer!.Id">Do not Order</a>
 
@@ -27,9 +27,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     

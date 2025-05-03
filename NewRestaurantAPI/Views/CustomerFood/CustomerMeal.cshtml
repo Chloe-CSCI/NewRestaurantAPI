@@ -2,22 +2,29 @@
 
 @{
 
-    ViewData["Title"] = "Edit"; //make so that this can be a way for customers to rate their food.
+    //make so that this can be a way for customers to rate their food.
     var participant = Model.customer;
     var meal = Model.food;
+    ViewData["Title"] = $"{participant!.Name} has reviewed the {meal!.FoodName}"; 
 }
 
-<h1>CusomertMeal</h1>
+<h4>@ViewData["Title"]</h4>
 
-<h4>CustomerFood</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CustomerMeal" id="formCustomerMeal">
+
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" name="customerFoodId" value="@Model.Id"/>
+
+            <input type="hidden" name="customerFoodId" value="@Model.Id" />
             <input type="hidden" name="customerId" value="@participant!.Id"/>
           
+
+
+
+
             <div class="form-group">
                 <label asp-for="menuItem" class="control-label"></label>
                 <select class="form-select" asp-for="menuItem" class="form-select">

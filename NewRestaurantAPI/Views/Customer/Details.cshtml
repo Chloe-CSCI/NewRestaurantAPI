@@ -6,6 +6,10 @@
 
 <h1>Details</h1>
 
+@section scripts{
+    <script src="~/js/stylize.js"></script>
+}
+
 <div>
     <h4>Customer</h4>
     <hr />
@@ -90,7 +94,7 @@
                 </td>
 
                 <td>
-                        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover"
+                        <button type="button" class="btn-sm" data-bs-toggle="popover"
                                 title="Review Meal" data-bs-content="Come and review the food">
                                 <form>
                     <a asp-action="CustomerMeal" asp-controller="CustomerFood"

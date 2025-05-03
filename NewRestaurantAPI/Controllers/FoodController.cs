@@ -27,7 +27,7 @@ namespace NewRestaurantAPI.Controllers
         }
 
 
-
+        //This will bu used to order the food for the customer. This will take the user to the food index, which will then let them pick a food to order.
         public async Task<IActionResult> OrderFood([Bind(Prefix = "id")] int customerId)
         {
             var participant = await _customerRepo.ReadAsync(customerId);
@@ -66,7 +66,7 @@ namespace NewRestaurantAPI.Controllers
 
         public async Task<IActionResult> Details(int id) //This will show the details of the food.
         {
-            var meal = await _foodRepo.ReadAsync(id);
+            var meal = await _foodRepo.ReadAsync(id);//this will read the data of the food.
             if (meal == null)
             {
                 return RedirectToAction("Index");

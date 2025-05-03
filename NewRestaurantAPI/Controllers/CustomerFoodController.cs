@@ -33,7 +33,7 @@ namespace NewRestaurantAPI.Controllers
         //be able to create a link with the customer and food.
         
         public async Task<IActionResult> Create(//Takes two parameters.
-            [Bind(Prefix ="id")] int customerId, int foodId)
+            [Bind(Prefix ="id")] int customerId, int foodId) // the parameters are the id's of the customer and the food.
         {
             var participant = await _customerRepo.ReadAsync(customerId);
             if(participant == null)
@@ -67,7 +67,7 @@ namespace NewRestaurantAPI.Controllers
 
 
 
-        // this will show the customers rating of the food.
+        // this will show the customers rating of the food. Taking the parameters of the id of the customer and the food.
      
         public async Task<IActionResult> CustomerMeal(
       [Bind(Prefix = "id")] int customerId, int foodId)
@@ -75,7 +75,7 @@ namespace NewRestaurantAPI.Controllers
             var participant = await _customerRepo.ReadAsync(customerId);
             if (participant == null)
             {
-                return RedirectToAction("Index", "customer");
+                return RedirectToAction("Index", "Customer");
             }
             var customerFood = participant.CustomersFood
                 .FirstOrDefault(cf => cf.FoodId == foodId);
@@ -98,7 +98,7 @@ namespace NewRestaurantAPI.Controllers
 
 
 
-        // This will be used to delete the customer.
+        // This will be used to delete the customer. While taking the parameter of the id of the customer and the food.
         public async Task<IActionResult> Delete(
       [Bind(Prefix = "id")] int customerId, int foodId)
         {
@@ -124,7 +124,7 @@ namespace NewRestaurantAPI.Controllers
             return RedirectToAction("Details", "customer", new { id = customerId });
         }
 
-
+        //thiis is used fro Authenticating the usesr and getting the user name.
         public IActionResult GetUserName()
         {
             if (User.Identity!.IsAuthenticated)

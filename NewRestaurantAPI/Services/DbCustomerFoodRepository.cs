@@ -35,18 +35,18 @@ namespace NewRestaurantAPI.Services
         {
             var participant = await _customerRepo.ReadAsync(customerId);
             if (participant == null)
-            {
+            {//this will be if the customer was not found.
                 return null;
             }
             var customerPick = participant.CustomersFood
                 .FirstOrDefault(cf => cf.FoodId == foodId);
             if(customerPick != null)
-            {
+            {// This is if the customer already has a food.
                 return null;
             }
             var meal = await _foodRepo.ReadAsync(foodId);
             if (meal == null)
-            {
+            {//this will be if the food was not found.
                 return null;
             }
             var customerFood = new CustomerFood
@@ -72,7 +72,7 @@ namespace NewRestaurantAPI.Services
 
 
         public async Task UpdateCustomerFoodAsync(int customerFoodId, string menuItem) // This will update the customerFood by pulling from the CustomerFood Entity.
-        {
+        {//this will connect to the post from customerFood Controller. 
             var custFood = await ReadAsync(customerFoodId);
             if (custFood != null)
             {
