@@ -25,13 +25,13 @@ namespace NewRestaurantAPI.Services
             //and return a new query with the related data.
         {
             return await _db.CustomerFood
-                .Include(cf => cf.food)
                 .Include(cf => cf.customer)
+                .Include(cf => cf.food)
                 .ToListAsync();
         }
 
 
-        public async Task<CustomerFood?> CreateAsync(int customerId, int foodId)
+        public async Task<CustomerFood?> CreateAsync(int customerId, int foodId) // this will help create the customer and food by getting from the database.
         {
             var participant = await _customerRepo.ReadAsync(customerId);
             if (participant == null)
@@ -50,7 +50,7 @@ namespace NewRestaurantAPI.Services
                 return null;
             }
             var customerFood = new CustomerFood
-            {
+            {// This will be able to get new variable to reference back to.
                 customer = participant,
                 food = meal
             };
@@ -64,8 +64,8 @@ namespace NewRestaurantAPI.Services
         public async Task<CustomerFood?> ReadAsync(int id) //this will retrieve an object from the database, includes query results from customer and food.
         {// and return a new query with the related data.
             return await _db.CustomerFood
-                .Include(cf => cf.food)
                 .Include(cf => cf.customer)
+                .Include(cf => cf.food)
                 .FirstOrDefaultAsync(cf => cf.Id == id);
 
         }

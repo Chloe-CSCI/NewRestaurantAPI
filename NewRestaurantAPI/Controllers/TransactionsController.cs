@@ -11,12 +11,12 @@ namespace NewRestaurantAPI.Controllers
     {
        
 
-            private readonly ITransactionsRepository _transactionsRepo;
+            private readonly ITransactionsRepository _transactionsRepo;// it will be able to pull the interface of the ITransactions.
         private readonly ICustomerRepository _customerRepo;
         private readonly IFoodRepository _foodRepo;
 
 
-
+        //this would 
         public TransactionsController(ITransactionsRepository transactionsRepo, ICustomerRepository customerRepo, IFoodRepository foodRepo)
             {
                 _transactionsRepo = transactionsRepo;

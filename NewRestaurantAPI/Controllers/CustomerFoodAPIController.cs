@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NewRestaurantAPI.Services;
-using NewRestaurantAPI.Models.ViewModels;
+
 namespace NewRestaurantAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -36,7 +36,7 @@ namespace NewRestaurantAPI.Controllers
         }
 
 
-        [HttpPut("CusomertMeal")] // this is used to update the custoemrFood repo.
+        [HttpPut("CustomerMeal")] // this is used to update the custoemrFood repo.
         public async Task<IActionResult> PutAsync(
             [FromForm] int customerId,
             [FromForm] int customerFoodId,
@@ -57,7 +57,27 @@ namespace NewRestaurantAPI.Controllers
         }
 
 
+        //This will be for getting the list of customers names, food, and what is related to the menuItem from CustomerFood entity.
+        /*
 
+        [HttpGet("customersfoodreview")]
+        public async Task<IActionResult> GetAsync()
+        {
+            var participant = await _customerRepo.ReadAllAsync();
+            var customerFood = _customerFoodRepo.ReadAllAsync();
+            var model = from c in participant
+                        join cf in customerFood
+                            on c.Id equals cf.customerId
+                        orderby c.Name
+                        select new
+                        {
+                            CustomerName = c.Name,
+                            NameOfFood = cf.FoodName,
+                            cf.menuItem
+                        };
+            return Ok(model);
+        }
+        */
 
         public IActionResult GetUserName()//This is for authentication of the user. This will identify them.
         {

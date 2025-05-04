@@ -15,14 +15,14 @@ namespace NewRestaurantAPI.Services
             _db = db;
         }
 
-        public async Task<Food> CreateAsync(Food newFood)
+        public async Task<Food> CreateAsync(Food newFood)// this will be able to create a new food, get from database, and save the changes.
         {
             await _db.AddRangeAsync(newFood);
             await _db.SaveChangesAsync();
             return newFood;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)// delete the food by the id, check if it is or is not there, remove it, and save the changes.
         {
             Food? foodToDelete = await ReadAsync(id);
             if (foodToDelete != null)
@@ -32,21 +32,23 @@ namespace NewRestaurantAPI.Services
             }
         }
 
-        public async Task<ICollection<Food>> ReadAllAsync()
+        public async Task<ICollection<Food>> ReadAllAsync()// read all that is in the Food.
         {
             return await _db.Food
                 .Include(f => f.CustomerFoods)
+                .ThenInclude(cf => cf.customer)
                 .ToListAsync();
         }
 
-        public async Task<Food?> ReadAsync(int id)
+        public async Task<Food?> ReadAsync(int id)//read a food.
         {
             return await _db.Food
                 .Include(f => f.CustomerFoods)
+                .ThenInclude(cf => cf.customer)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task UpdateAsync(int oldId, Food food)
+        public async Task UpdateAsync(int oldId, Food food)//updates the food, checks if there is something to update, updates accordingly, then saves changes.
         {
             Food? foodToUpdate = await ReadAsync(oldId);
             if (foodToUpdate != null)

@@ -1,6 +1,7 @@
 ﻿@model NewRestaurantAPI.Models.Entities.Customer
 
 @{ //loop through the meals and show them.
+    //this will show the details of the customer, including the Id, Name, Phone number, and Reservation Number.
     ViewData["Title"] = "Details";
 }
 
@@ -97,8 +98,8 @@
                         <button type="button" class="btn-sm" data-bs-toggle="popover"
                                 title="Review Meal" data-bs-content="Come and review the food">
                                 <form>
-                    <a asp-action="CustomerMeal" asp-controller="CustomerFood"
-                       asp-route-customerid="@Model!.Id" asp-route-foodId="@item.FoodId">
+                    <a asp-action="customermeal" asp-controller="CustomerFood"
+                                   asp-route-customerid="@Model!.Id" asp-route-foodId="@item.FoodId">
                         Review Meal
                     </a>
                         </form>

@@ -5,11 +5,13 @@ export class FetchRepository {
     #deleteAPIName
     #readAllAPIName
     #updateAPIName
+    createAPIName
     constructor(baseURL) {
         this.#baseURL = baseURL;
         this.#readAllAPIName = "all";
         this.#deleteAPIName = "delete";
         this.#updateAPIName = "update";
+        this.createAPIName = "create";
 
     }
 
@@ -23,6 +25,9 @@ export class FetchRepository {
 
     set readAllAPIName(name) {
         this.#readAllAPIName = name;
+    }
+    set createAPIName(name) {
+        this.createAPIName = name;
     }
 
     async readAll() {

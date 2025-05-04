@@ -51,6 +51,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+//adding the Authorization and Authentication
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -1,5 +1,5 @@
 ﻿"use strict";
-
+// this will be able to show what is in the index for the customerFoodIndex.
 import { FetchRepository } from "./FetchRepository.js";
 
 (async function _CustomerFoodIndex(){
@@ -16,7 +16,7 @@ import { FetchRepository } from "./FetchRepository.js";
 })();
 
 
-
+//This will help populate the dish.
 function populateTable(dish) {
     const tableBody = document.getElementById("tableBody");
     dish.forEach(item) => {

@@ -27,7 +27,7 @@ namespace NewRestaurantAPI.Controllers
         }
 
 
-        //This will bu used to order the food for the customer. This will take the user to the food index, which will then let them pick a food to order.
+        //This will be used to order the food for the customer. This will take the user to the food index, which will then let them pick a food to order.
         public async Task<IActionResult> OrderFood([Bind(Prefix = "id")] int customerId)
         {
             var participant = await _customerRepo.ReadAsync(customerId);
@@ -35,10 +35,10 @@ namespace NewRestaurantAPI.Controllers
             {
                 return RedirectToAction("Index", "Customer");
             }
-            var allFood = await _foodRepo.ReadAllAsync();
+            var restr = await _foodRepo.ReadAllAsync();
             var foodOrdered = participant.CustomersFood
                 .Select(cf => cf.food).ToList();
-            var foodNotOrdered = allFood.Except(foodOrdered);
+            var foodNotOrdered = restr.Except(foodOrdered);
             ViewData["Customer"] = participant;
             return View(foodNotOrdered);
         }

@@ -1,5 +1,5 @@
 ﻿"use strict";
-
+//This will be for deleting the customer and the food.
 import { FetchRepository } from "./FetchRepository.js";
 
 (function _customerFoodDelete() {

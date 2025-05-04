@@ -59,7 +59,8 @@ namespace NewRestaurantAPI.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken, ActionName("Create")]
-        public async Task<IActionResult> CreateConfirmed(int customerId, int foodId)
+        public async Task<IActionResult> CreateConfirmed(int customerId, int //this is showing that the create did occur.
+            foodId)
         {
             await _customerFoodRepo.CreateAsync(customerId, foodId);
             return RedirectToAction("Details","Customer", new { id = customerId });
@@ -69,7 +70,7 @@ namespace NewRestaurantAPI.Controllers
 
         // this will show the customers rating of the food. Taking the parameters of the id of the customer and the food.
      
-        public async Task<IActionResult> CustomerMeal(
+        public async Task<IActionResult> CustomerMeal( // this will show when clicking on review meal
       [Bind(Prefix = "id")] int customerId, int foodId)
         {
             var participant = await _customerRepo.ReadAsync(customerId);
@@ -85,7 +86,6 @@ namespace NewRestaurantAPI.Controllers
             }
             return View(customerFood);
         }
-
         [HttpPost, ValidateAntiForgeryToken, ActionName("CusomertMeal")]
         public async Task<IActionResult> CustomerMealConfirmed(
             string customerId, int customerFoodId, string menuItem)

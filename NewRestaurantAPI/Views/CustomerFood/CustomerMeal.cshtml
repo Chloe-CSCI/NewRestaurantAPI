@@ -24,7 +24,7 @@
 
 
 
-
+            
             <div class="form-group">
                 <label asp-for="menuItem" class="control-label"></label>
                 <select class="form-select" asp-for="menuItem" class="form-select">
@@ -52,6 +52,7 @@
 </div>
 
 @section Scripts {
+    
     <script defer type="module" src="~/js/CustomerFoodCustomerMeal.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
